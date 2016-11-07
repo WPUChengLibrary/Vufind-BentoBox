@@ -1,6 +1,6 @@
 # Vufind-BentoBox
 
-BentoBox Combined Search from William Paterson University Library.
+BentoBox Combined Search from William Paterson University Cheng Library.
 
 Based on Vufind 2.3
 
