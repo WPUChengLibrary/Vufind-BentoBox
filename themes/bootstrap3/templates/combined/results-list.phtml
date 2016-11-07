@@ -1,0 +1,151 @@
+<?
+  $view = $currentSearch['view'];
+  $results = $view->results;
+  $params = $results->getParams();
+  $lookfor = $params->getDisplayQuery();
+  $recordTotal = $results->getResultTotal();
+
+  // More link should use default limit, not custom limit:
+  $limit = $params->getLimit();
+  $params->setLimit($params->getOptions()->getDefaultLimit());
+?>
+
+
+<? if ($currentSearch['more_link']=='More Articles Results'): 
+ $moreUrl = "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&scope=site&type=0&custid=s8953837&groupid=main&profid=eds&mode=bool&lang=en&authtype=cookie,ip,guest&bquery=ZT Article AND ".urlencode($lookfor);
+ elseif($currentSearch['more_link'] =='More LibGuides Results'):
+$moreUrl = "http://guides.wpunj.edu/srch.php?q=".urlencode($lookfor);
+ elseif($currentSearch['more_link']!=='More Articles results' or $currentSearch['more_link'] !=='More LibGuides Results'):
+   $moreUrl = $this->url($params->getOptions()->getSearchAction()) . $results->getUrlQuery()->setPage(1);
+ endif; 
+   $params->setLimit($limit);
+ ?>
+
+
+
+<? if ($currentSearch['more_link'] !== 'More LibGuides Results'): ?>
+  <div class="pull-right">
+    <a class="btn btn-info" href="<?=$moreUrl?>" target = '_blank' class="btn btn-link"><i class="fa fa-external-link-square"></i> More Results</a>
+    <br/>
+    <? endif; ?>
+    
+
+
+ <!-- new added LibGuides link & Databases-->     
+<? if ($currentSearch['more_link']=='More LibGuides Results'): ?>
+  
+ <div class="pull-right"><a class="btn btn-info" href="http://guides.wpunj.edu/az.php?q=<?=urlencode($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-external-link-square"></i> <?=$this->transEsc('More Results')?></a></div>
+<div><h2><a id="databases" name="databases"></a><a href="http://guides.wpunj.edu/az.php?q=<?=urlencode($lookfor)?>" target="_blank">Databases</a></h2></div>
+<script>
+springshare_widget_config_1473269124622 = { path: 'assets' };
+</script>
+<div id="s-lg-widget-1473269124622"></div>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://lgapi.libapps.com/widgets.php?site_id=915&widget_type=2&search_terms=<?=urlencode($lookfor)?>&search_match=2&subject_ids=&sort_by=name&list_format=1&drop_text=Select+a+Database...&output_format=2&load_type=2&enable_description=0&widget_title=Recommended+Database&widget_height=200&widget_width=100%25&widget_link_color=2954d1&widget_embed_type=1&num_results=5&enable_more_results=1&window_target=2&config_id=1473269124622";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","s-lg-widget-script-1473269124622");</script>
+
+   <div>  <i>Or try Selected Databases RECOMMENDED by librarians:</i>
+    <div> <a href="http://ezproxy.wpunj.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&site=ehost-live&scope=site&type=1&db=&db=a9h&authtype=ip&bquery=<?=urlencode($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-database"></i> <?=$this->transEsc('Academic Search Complete')?></a>  </div>
+      <div>
+    <a href="http://ezproxy.wpunj.edu/login?url=http://site.ebrary.com/lib/wpunj/search.action?p00=<?=urlencode($lookfor)?>&fromSearch=fromSearch" target='_blank' class="btn btn-link"><i class="fa fa-database"></i> <?=$this->transEsc('Ebrary Ebooks')?></a>  </div>
+      <div>
+        <div>
+    <a href="http://ezproxy.wpunj.edu/login?url=http://www.jstor.org/action/doBasicSearch?Query=<?=urlencode($lookfor)?>&acc=on&wc=on&fc=off&group=none" target='_blank' class="btn btn-link"><i class="fa fa-database"></i> <?=$this->transEsc('Jstor')?></a>  </div>
+     <div>
+           <div>
+    <a href="http://ezproxy.wpunj.edu/login?url=https://scholar.google.com/scholar?hl=en&q=<?=urlencode($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-database"></i> <?=$this->transEsc('Google Scholar')?></a>  </div>
+    <a href="http://ezproxy.wpunj.edu/login?url=http://search.credoreference.com/search/all/?searchPhrase=<?=urlencode($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-database"></i> <?=$this->transEsc('Credo Reference\'s Academic Core')?></a>  </div>
+     <div>
+    <a href="http://ezproxy.wpunj.edu/login?url=http://search.proquest.com/central" target='_blank' class="btn btn-link"><i class="fa fa-database"></i> <?=$this->transEsc('ProQuest Central')?></a>  </div>
+    <br/> <br/></div>
+  
+  
+ <? endif; ?>
+  <!-- new added LibGuides link -->   
+  </div>
+  
+  
+<h2><a id="<?=$this->transEsc($currentSearch['label'])?>" name="<?=$this->transEsc($currentSearch['label'])?>"></a><a href="<? echo $moreUrl; ?>" target='_blank' class=""><?=$this->transEsc($currentSearch['label'])?></a></h2>
+<? if (isset($currentSearch['sublabel'])): ?>
+ <i><?=$this->transEsc($currentSearch['sublabel'])?></i>
+<? endif; ?>
+<div class="clearfix">
+  <div class="pull-left help-block">
+    <? if ($recordTotal > 0): ?>
+      <?=$this->transEsc("Showing")?>
+      <strong><?=$this->localizedNumber($results->getStartRecord())?></strong> - <strong><?=$this->localizedNumber($results->getEndRecord())?></strong>
+      <? if (!isset($view->skipTotalCount)): ?>
+        <?=$this->transEsc('of')?> <strong><?=$this->localizedNumber($recordTotal)?></strong>
+      <? endif; ?>
+      <? if (isset($view->overrideSearchHeading)): ?>
+        <?=$view->overrideSearchHeading?>
+      <? elseif ($params->getSearchType() == 'basic'): ?>
+        <?=$this->transEsc('for search')?>: <strong>'<?=$this->escapeHtml($lookfor)?>'</strong>.
+      <? endif; ?>
+ <!--    <? if ($qtime = $results->getQuerySpeed()): ?>
+        <?=$this->transEsc('query time')?>: <?=$this->localizedNumber($qtime, 2).$this->transEsc('seconds_abbrev')?>
+      <? endif; ?> -->
+      <?=$this->search()->renderSpellingSuggestions('<strong>' . $this->transEsc('spell_suggest') . '</strong>:', $results, $this); ?>
+    <? else: ?>
+      <h3><?=$this->transEsc('nohit_heading')?></h3>
+    <? endif; ?>
+  </div>
+</div>
+<? /* End Listing Options */ ?>
+
+<? if ($recordTotal < 1): ?>
+  <p class="alert alert-danger">
+    <? if (isset($view->overrideEmptyMessage)): ?>
+      <?=$view->overrideEmptyMessage?>
+    <? else: ?>
+      <?=$this->transEsc('nohit_prefix')?> - <strong><?=$this->escapeHtml($lookfor)?></strong> - <?=$this->transEsc('nohit_suffix')?>
+    <? endif; ?>
+  </p>
+  <? if (isset($view->parseError)): ?>
+    <p class="alert alert-danger"><?=$this->transEsc('nohit_parse_error')?></p>
+  <? endif; ?>
+  <?=$this->search()->renderSpellingSuggestions($this->transEsc('nohit_spelling') . ':', $results, $this); ?>
+  <? foreach ($results->getRecommendations('top') as $current): ?>
+    <?=$this->recommend($current)?>
+  <? endforeach; ?>
+  <? foreach ($results->getRecommendations('noresults') as $current): ?>
+    <?=$this->recommend($current)?>
+  <? endforeach; ?>
+<? else: ?>
+  <?
+    $viewType = in_array('list', array_keys($params->getViewList()))
+      ? 'list' : $params->getView();
+    $viewParams = array('results' => $results, 'params' => $params);
+    if (!$params->getOptions()->supportsCart()) {
+      $viewParams['hideCartControls'] = true;
+    }
+  ?>
+  <?=$this->render('search/list-' . $viewType . '.phtml', $viewParams)?>
+  <? if ($currentSearch['more_link']): ?>
+    <p class="pad text-right"><a class="btn btn-info" href="<?=$moreUrl?>"><?=$this->transEsc($currentSearch['more_link'])?> <i class="fa fa-long-arrow-right"></i></a></p>
+  <? endif; ?>
+  
+      <? if ($currentSearch['more_link']=='More LibGuides Results'): ?>
+       <br/> <br/>
+   <div>  
+   
+    
+   <div>
+   
+           <div class="pull-right"><a class="btn btn-info" href="http://search.ebscohost.com/login.aspx?direct=true&amp;site=eds-live&amp;scope=site&amp;type=44&amp;db=edspub&amp;custid=s8953837&amp;groupid=main&amp;profid=pfi&amp;mode=bool&amp;authtype=ip,guest&bquery=<?=urlencode($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-external-link-square"></i> <?=$this->transEsc('More Results')?></a></div>
+<a href="http://search.ebscohost.com/login.aspx?direct=true&amp;site=eds-live&amp;scope=site&amp;type=44&amp;db=edspub&amp;custid=s8953837&amp;groupid=main&amp;profid=pfi&amp;mode=bool&amp;authtype=ip,guest&bquery=<?=urlencode($lookfor)?>" target='_blank' ><h2><a id="journals" name="journals"></a>Journal Titles</h2></a>
+<iframe src="https://chengfind.wpunj.edu/publicationfinder/results.php?query=SO+<?=$this->escapeHtml($lookfor)?>*&expander=" width=100% height="500" scrolling="yes" style="overflow:hidden; margin-top:-4px; margin-left:-4px; border:none;"></iframe>
+<br/> <br/>
+     </div>
+    
+            <!--
+         <div>  <h2>More Search Options</h2>
+    <div> <a href="http://search.ebscohost.com/login.aspx?direct=true&amp;site=eds-live&amp;scope=site&amp;type=44&amp;db=edspub&amp;custid=s8953837&amp;groupid=main&amp;profid=pfi&amp;mode=bool&amp;authtype=ip,guest&bquery=<?=$this->escapeHtml($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-link"></i> <?=$this->transEsc('Journal Titles')?></a>  </div>
+    <div>
+    <a href="http://guides.wpunj.edu/er.php?search=<?=$this->escapeHtml($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-link"></i> <?=$this->transEsc('E-Reserves')?></a>  </div>
+      <div>
+        <div>
+    <a href="http://cdm15701.contentdm.oclc.org/cdm/search/searchterm/<?=$this->escapeHtml($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-link"></i> <?=$this->transEsc('Digital Collections')?></a>  </div>     <br/> <br/>
+      </div> -->
+ <? endif; ?>
+
+  
+<? endif; ?>

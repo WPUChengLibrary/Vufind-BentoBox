@@ -1,0 +1,43 @@
+<? if ($mobileViewLink = $this->mobileUrl()): // display 'return to mobile' link when applicable ?>
+  <hr/>
+  <div class="mobileViewLink"><a href="<?=$this->escapeHtmlAttr($mobileViewLink)?>" class="btn btn-primary btn-lg"><?=$this->transEsc("mobile_link")?></a></div>
+<? endif; ?>
+<hr/>
+<div class="col-sm-3"><p><strong><?=$this->transEsc('Search Options')?></strong></p>
+<ul>
+  <li><a href="<?=$this->url('search-history')?>"><?=$this->transEsc('Search History')?></a></li>
+  <li><a href="<?=$this->url('search-advanced')?>"><?=$this->transEsc('Advanced Search')?></a></li>
+</ul>
+</div>
+<div class="col-sm-3"><p><strong><?=$this->transEsc('Find More')?></strong></p>
+<ul>
+  <li><a href="<?=$this->url('browse-home')?>"><?=$this->transEsc('Browse the Catalog')?></a></li>
+  <li><a href="<?=$this->url('alphabrowse-home')?>"><?=$this->transEsc('Browse Alphabetically')?></a></li>
+  <li><a href="<?=$this->url('search-reserves')?>"><?=$this->transEsc('Course Reserves')?></a></li>
+  <li><a href="http://guides.wpunj.edu/er.php?search="><?=$this->transEsc('Online Reserves')?></a></li>
+  <li><a href="<?=$this->url('search-newitem')?>"><?=$this->transEsc('New Items')?></a></li>
+</ul>
+</div>
+<div class="col-sm-3"><p><strong><?=$this->transEsc('Need Help?')?></strong></p>
+<ul>
+  <li><a href="<?=$this->url('help-home')?>?topic=search" class="help-link" title="<?=$this->transEsc('Search Tips')?>"><?=$this->transEsc('Search Tips')?></a></li>
+  <li><a href="http://www.wpunj.edu/library/ask-a-question-2.dot"><?=$this->transEsc('Ask a Librarian')?></a></li>
+    <li><a href="http://chenglibrary.ask.libraryh3lp.com/"><?=$this->transEsc('Library FAQ')?></a></li>
+  <li><a href="<?=$this->url('help-home')?>?topic=search" class="help-link" title="<?=$this->transEsc('Search Tips')?>"><?=$this->transEsc('Search Tips')?></a></li>
+</ul>
+</div>
+<div class="col-sm-3"><p><strong><?=$this->transEsc('Links')?></strong></p>
+  <ul>
+    <li><a href="http://www.wpunj.edu/library"><?=$this->transEsc('Cheng Library Page')?></a></li>
+    <li><a href="http://www.wpunj.edu"><?=$this->transEsc('WPUNJ Main Page')?></a></li>
+    <li><a href="http://njsl-agent.auto-graphics.com/agent/login.asp?cid=njsl&lid=njp&mode=g"><?=$this->transEsc('Search local libraries with JerseyCat')?></a></li>
+<a href="https://www.facebook.com/pages/William-Paterson-University-David-and-Lorraine-Cheng-Library/200518706682422"><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></a>
+<a href="http://twitter.com/chenglibrary"><i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i></a>
+<a href="http://www.instagram.com/chenglibrary"><i class="fa fa-instagram fa-3x" aria-hidden="true"></i></a>
+<a href="http://www.youtube.com/user/ChengLibrary"><i class="fa fa-youtube-square fa-3x" aria-hidden="true"></i></a>
+ <a href="https://www.pinterest.com/curmats/pins/follow/?guid=eFzTE65Wvt0H"><i class="fa fa-pinterest-square fa-3x" aria-hidden="true"></i></a>
+  </ul>
+</div>
+
+
+
