@@ -36,13 +36,24 @@ $moreUrl = "http://guides.wpunj.edu/srch.php?q=".urlencode($lookfor);
   
  <div class="pull-right"><a class="btn btn-info" href="http://guides.wpunj.edu/az.php?q=<?=urlencode($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-external-link-square"></i> <?=$this->transEsc('More Results')?></a></div>
 <div><h2><a id="databases" name="databases"></a><a href="http://guides.wpunj.edu/az.php?q=<?=urlencode($lookfor)?>" target="_blank">Databases</a></h2></div>
-<script>
-springshare_widget_config_1473269124622 = { path: 'assets' };
-</script>
-<div id="s-lg-widget-1473269124622"></div>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://lgapi.libapps.com/widgets.php?site_id=915&widget_type=2&search_terms=<?=urlencode($lookfor)?>&search_match=2&subject_ids=&sort_by=name&list_format=1&drop_text=Select+a+Database...&output_format=2&load_type=2&enable_description=0&widget_title=Recommended+Database&widget_height=200&widget_width=100%25&widget_link_color=2954d1&widget_embed_type=1&num_results=5&enable_more_results=1&window_target=2&config_id=1473269124622";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","s-lg-widget-script-1473269124622");</script>
 
-   <div>  <i>Or try Selected Databases RECOMMENDED by librarians:</i>
+<div id="databases" class="row result clearfix">
+<script src="//lgapi.libapps.com/sa.php?site_id=xxx"></script><script>
+springshare_widget_config_1479753727825 = { path: 'assets' };
+</script>
+<div id="s-lg-widget-1479753727825"></div>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://lgapi.libapps.com/widgets.php?site_id=915&widget_type=2&search_terms=<?=urlencode($lookfor)?>&search_match=2&subject_ids=&sort_by=name&list_format=1&drop_text=Select+a+Database...&output_format=1&load_type=2&enable_description=0&widget_title=A-Z+Database+List&widget_height=250&widget_width=100%25&widget_link_color=2954d1&widget_embed_type=1&num_results=6&enable_more_results=0&window_target=2&config_id=1479753727825";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","s-lg-widget-script-1479753727825");</script>
+<style>
+                #s-lg-widget-1479753727825 ul {padding-left: 25px;}
+				#s-lg-widget-1479753727825 li {font-weight: 600;}
+                #s-lg-widget-1479753727825 ul li {list-style-type: decimal;}
+</style>
+</div>
+
+
+
+   <div>  <i>Please try Selected Databases RECOMMENDED by librarians:</i>
+
     <div> <a href="http://ezproxy.wpunj.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&site=ehost-live&scope=site&type=1&db=&db=a9h&authtype=ip&bquery=<?=urlencode($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-database"></i> <?=$this->transEsc('Academic Search Complete')?></a>  </div>
       <div>
     <a href="http://ezproxy.wpunj.edu/login?url=http://site.ebrary.com/lib/wpunj/search.action?p00=<?=urlencode($lookfor)?>&fromSearch=fromSearch" target='_blank' class="btn btn-link"><i class="fa fa-database"></i> <?=$this->transEsc('Ebrary Ebooks')?></a>  </div>
@@ -131,11 +142,26 @@ springshare_widget_config_1473269124622 = { path: 'assets' };
    <div>
    
            <div class="pull-right"><a class="btn btn-info" href="http://search.ebscohost.com/login.aspx?direct=true&amp;site=eds-live&amp;scope=site&amp;type=44&amp;db=edspub&amp;custid=s8953837&amp;groupid=main&amp;profid=pfi&amp;mode=bool&amp;authtype=ip,guest&bquery=<?=urlencode($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-external-link-square"></i> <?=$this->transEsc('More Results')?></a></div>
-<a href="http://search.ebscohost.com/login.aspx?direct=true&amp;site=eds-live&amp;scope=site&amp;type=44&amp;db=edspub&amp;custid=s8953837&amp;groupid=main&amp;profid=pfi&amp;mode=bool&amp;authtype=ip,guest&bquery=<?=urlencode($lookfor)?>" target='_blank' ><h2><a id="journals" name="journals"></a>Journal Titles</h2></a>
-<iframe src="https://chengfind.wpunj.edu/publicationfinder/results.php?query=SO+<?=$this->escapeHtml($lookfor)?>*&expander=" width=100% height="500" scrolling="yes" style="overflow:hidden; margin-top:-4px; margin-left:-4px; border:none;"></iframe>
+<div><h2><a id="journals" name="journals"><a href="http://search.ebscohost.com/login.aspx?direct=true&amp;site=eds-live&amp;scope=site&amp;type=44&amp;db=edspub&amp;custid=s8953837&amp;groupid=main&amp;profid=pfi&amp;mode=bool&amp;authtype=ip,guest&bquery=<?=urlencode($lookfor)?>" target='_blank' >Journal Titles</a></h2></div>
+
+<script>
+function setIframeHeight(iframe) {
+	if (iframe) {
+		var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+		if (iframeWin.document.body) {
+			iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+		}
+	}
+};
+window.onload = function () {
+	setIframeHeight(document.getElementById('iFrame'));
+};
+</script>
+<iframe src="/publicationfinder/results.php?query=SO+<?=$this->escapeHtml($lookfor)?>*&sort=relevance" id="iFrame" width=100% scrolling="no" frameborder="0"></iframe>
 <br/> <br/>
+
      </div>
-    
+
             <!--
          <div>  <h2>More Search Options</h2>
     <div> <a href="http://search.ebscohost.com/login.aspx?direct=true&amp;site=eds-live&amp;scope=site&amp;type=44&amp;db=edspub&amp;custid=s8953837&amp;groupid=main&amp;profid=pfi&amp;mode=bool&amp;authtype=ip,guest&bquery=<?=$this->escapeHtml($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-link"></i> <?=$this->transEsc('Journal Titles')?></a>  </div>

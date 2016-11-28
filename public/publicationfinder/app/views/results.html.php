@@ -81,16 +81,14 @@ $encodedHighLigtTerm = http_build_query(array('highlight'=>$searchTerm));
 
 		
 
-<div id="toptabcontent">
-<div class="table">
-    <div class="table-row">
-<div class="table-cell">
+
+<div class="">
 <?php if ($debug=='y') {?>
     <div style="float:right"><a target="_blank" href="debug.php?result=y">Search response XML</a></div>
     <?php   
 } 
     ?>
-<div class="top-menu">
+<div class="">
 <?php if ($error) { ?>
     <div class="error">
         <?php echo $error; ?>
@@ -101,43 +99,61 @@ $encodedHighLigtTerm = http_build_query(array('highlight'=>$searchTerm));
 
 
 
-<div class="results table">
+<div class="">
     <?php if (empty($results['records'])) { ?>
-        <div class="result table-row">
-            <div class="table-cell">
-                <h2><i>No results were found.</i></h2>
+            <div class="pull-left help-block">
+                <h3>No Results!</h3>
+              <p class="alert alert-danger">
+          Your search - <strong><?php echo $searchTerm ?></strong> - did not match any resources.      </p>
             </div>
-        </div>
+
     <?php 
 } else { 
     ?> 
-    <?php 
+
+    <?php $i = 0;
     foreach ($results['records'] as $result) { 
-        ?>
-            <div class="result table-row">
-                <div class="record-id table-cell">
-                    <?php echo $result['ResultId']; ?>.
-                </div>                     
-                <div class="table-cell">
-                    <div style="margin-left: 10px">
+	 if(array_search("Ebrary Academic Complete", array_column($result['FullTextHoldings'],'Name')) !== 0 ){	 
+  if(++$i > 5)
+    break;
+	        ?>
+            <div class="row result clearfix">
+                <label class="pull-left">
+                    <?php echo $i; ?>
+                </label>                     
+                <div class="listentry col-xs-11">
+                    <div class="resultItemLine1">
         <?php 
         if ((!isset($_COOKIE['login']))&&$result['AccessLevel']==1) { ?>
                             <p>This record from <b>[<?php echo $result['DbLabel'] ?>]</b> cannot be displayed.<a href="login.php?path=results&<?php echo $encodedSearchTerm;?>&fieldcode=<?php echo $fieldCode; ?>">Login</a> for full access.</p>
 		<?php 
         } else {  
             ?>
-						      <div class="link">
 			<?php 
             if (!empty($result['PLink'])&&(!empty($result['Items']['Ti']))) {
                  ?>  
-							         <a target="_blank" style="color: blue;" href="<?php echo $result['PLink'].'&authtype=cookie,uid&scope=site'; ?>"><?php echo $result['Items']['Ti']['Data']; ?> </a>
-						          </div>
-							         <div class="info">
+<style>
+a:link {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+a:active {
+    text-decoration: underline;
+}
+</style>
+
+							         <a target="_blank" class="title _record_link" href="<?php echo $result['PLink'].'&authtype=cookie,uid&scope=site'; ?>"><?php echo $result['Items']['Ti']['Data']; ?> </a>
+							         <div class="resultItemLine1">
             <?php 
             if (!empty($result['Items']['ISSN']['Data'])) echo 'ISSN: '.$result['Items']['ISSN']['Data'].'. <br>';
-                if (!empty($result['FullTextHoldings'])) {
+                if (!empty($result['FullTextHoldings'])) {                                              
                     foreach ($result['FullTextHoldings'] as $fullTextHolding) {?>
-                    <a target="_blank" style="color: blue;" href="<?php echo $fullTextHolding['URL']?>"><?php echo $fullTextHolding['Name']?></a>:
+                    <a class="custom-link" target="_blank" href="<?php echo $fullTextHolding['URL']?>"><?php echo $fullTextHolding['Name']?></a>:
                        <?php if (!empty($fullTextHolding['CoverageDates'])) echo ' '.$fullTextHolding['CoverageDates'].'. ';
                         if (!empty($fullTextHolding['Embargo'])) echo ' '.$fullTextHolding['Embargo'];
                         echo '<br>';
@@ -156,12 +172,9 @@ $encodedHighLigtTerm = http_build_query(array('highlight'=>$searchTerm));
     <?php 
     } ?>
     <?php 
-} ?>
+} }?>
 </div>
 
         </div>
     </div>
-</div>
-</div>      
-</div>
 
