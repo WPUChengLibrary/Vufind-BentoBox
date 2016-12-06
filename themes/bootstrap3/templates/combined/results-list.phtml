@@ -11,7 +11,7 @@
 ?>
 
 
-<? if ($currentSearch['more_link']=='More Articles Results'): 
+<? if ($currentSearch['more_link']=='More Article Results'): 
  $moreUrl = "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&scope=site&type=0&custid=s8953837&groupid=main&profid=eds&mode=bool&lang=en&authtype=cookie,ip,guest&bquery=ZT Article AND ".urlencode($lookfor);
  elseif($currentSearch['more_link'] =='More LibGuides Results'):
 $moreUrl = "http://guides.wpunj.edu/srch.php?q=".urlencode($lookfor);
@@ -38,7 +38,7 @@ $moreUrl = "http://guides.wpunj.edu/srch.php?q=".urlencode($lookfor);
 <div><h2><a id="databases" name="databases"></a><a href="http://guides.wpunj.edu/az.php?q=<?=urlencode($lookfor)?>" target="_blank">Databases</a></h2></div>
 
 <div id="databases" class="row result clearfix">
-<script src="//lgapi.libapps.com/sa.php?site_id=xxx"></script><script>
+<script src="//lgapi.libapps.com/sa.php?site_id=915"></script><script>
 springshare_widget_config_1479753727825 = { path: 'assets' };
 </script>
 <div id="s-lg-widget-1479753727825"></div>
@@ -161,6 +161,18 @@ window.onload = function () {
 <br/> <br/>
 
      </div>
+
+
+   <div>
+   
+           <div class="pull-right"><a class="btn btn-info" href="http://cdm15701.contentdm.oclc.org/cdm/search/searchterm/<?=urlencode($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-external-link-square"></i> <?=$this->transEsc('More Results')?></a></div>
+<div><h2><a id="contentdm" name="contentdm"><a href="http://cdm15701.contentdm.oclc.org/cdm/search/searchterm/<?=urlencode($lookfor)?>" target='_blank' >Digital Collections</a></h2></div>
+
+<iframe src="/dmQuery.php?q=<?=$this->escapeHtml($lookfor)?>" onload="this.style.height=this.contentWindow.document.body.scrollHeight + 'px';" width=100% scrolling="no" frameborder="0"></iframe>
+<br/> <br/>
+
+     </div>
+<br/>
 
             <!--
          <div>  <h2>More Search Options</h2>

@@ -79,7 +79,9 @@ $encodedHighLigtTerm = http_build_query(array('highlight'=>$searchTerm));
 
 		</script>
 
-		
+<div id="spinner" class="spinner" style="display:none;">
+			<img id="img-spinner" src="web/spinner.gif" alt="Loading"/>
+		</div>
 
 
 <div class="">
