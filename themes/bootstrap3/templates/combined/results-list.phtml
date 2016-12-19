@@ -12,7 +12,7 @@
 
 
 <? if ($currentSearch['more_link']=='More Article Results'): 
- $moreUrl = "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&scope=site&type=0&custid=s8953837&groupid=main&profid=eds&mode=bool&lang=en&authtype=cookie,ip,guest&bquery=ZT Article AND ".urlencode($lookfor);
+ $moreUrl = "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&scope=site&type=0&custid=s8953837&groupid=main&profid=eds&mode=bool&lang=en&authtype=cookie,ip,guest&bquery=".urlencode($lookfor)."+AND+PZ+Article";
  elseif($currentSearch['more_link'] =='More LibGuides Results'):
 $moreUrl = "http://guides.wpunj.edu/srch.php?q=".urlencode($lookfor);
  elseif($currentSearch['more_link']!=='More Articles results' or $currentSearch['more_link'] !=='More LibGuides Results'):
