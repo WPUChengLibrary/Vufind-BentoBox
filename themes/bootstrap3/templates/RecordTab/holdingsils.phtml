@@ -37,10 +37,14 @@
     <a class="placehold modal-link" title="<?=$this->transEsc('request_place_text')?>" href="<?=$this->recordLink()->getRequestUrl($holdingTitleHold)?>"><i class="fa fa-flag"></i>&nbsp;<?=$this->transEsc('title_hold_place')?></a>
 <? endif; ?>
 <? if (!empty($urls) || $openUrl): ?>
-  <h3><?=$this->transEsc("Internet")?></h3>
+  </br><!--   <h3><?=$this->transEsc("Internet")?></h3> -->
   <? if (!empty($urls)): ?>
     <? foreach ($urls as $current): ?>
-      <a href="<?=$this->escapeHtmlAttr($this->proxyUrl($current['url']))?>"><?=$this->escapeHtml($current['desc'])?></a><br/>
+   <!--   <a href="<?=$this->escapeHtmlAttr($this->proxyUrl($current['url']))?>"><?=$this->escapeHtml($current['desc'])?></a><br/> -->
+            <? if ($current['url'] !== $current['desc']): ?> 
+          <a class="btn btn-success" href="<?=$this->escapeHtmlAttr($this->proxyUrl($current['url']))?>" target="new">
+  <i class="fa fa-external-link-square fa-1x pull-left"></i><?=($current['url'] == $current['desc']) ? $this->transEsc('Click here for full text') : $this->escapeHtml($current['desc'])?></a><br/>
+ <? endif;?>
     <? endforeach; ?>
   <? endif; ?>
   <? if ($openUrl): ?><?=$this->openUrl($openUrl);?><? endif; ?>

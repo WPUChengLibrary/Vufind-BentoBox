@@ -202,7 +202,10 @@
         <th><?=$this->transEsc('Online Access')?>: </th>
         <td>
           <? foreach ($urls as $current): ?>
-            <a href="<?=$this->escapeHtmlAttr($this->proxyUrl($current['url']))?>"><?=$this->escapeHtml($current['desc'])?></a><br/>
+<? if ($current['url'] !== $current['desc']): ?> 
+          <a href="<?=$this->escapeHtmlAttr($this->proxyUrl($current['url']))?>" target="new">
+  <?=($current['url'] == $current['desc']) ? $this->transEsc('Click here for full text') : $this->escapeHtml($current['desc'])?></a>
+ <? endif;?><br/>
           <? endforeach; ?>
           <? if ($openUrl): ?>
             <?=$this->openUrl($openUrl)?><br/>
