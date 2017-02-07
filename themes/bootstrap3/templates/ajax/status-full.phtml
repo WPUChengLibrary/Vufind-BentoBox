@@ -21,6 +21,11 @@
           <span><?=$this->transEsc("status_unknown_message")?></span>
         <? elseif ($item['availability']): ?>
           <span class="text-success"><?=($item['reserve'] == 'Y') ? $this->transEsc("On Reserve") : $this->transEsc("Available")?></span>
+        
+		<? elseif ($item['status'] == 'Discharged'): ?>
+
+          <span class="text-success"><?=$this->transEsc($item['status'])?></span>
+        
         <? else: ?>
           <span class="text-danger"><?=$this->transEsc($item['status'])?></span>
         <? endif; ?>
