@@ -207,8 +207,11 @@
       <? /* Cite this */ ?>
 	 <a href="<?=$this->recordLink()->getActionUrl($this->driver, 'cite')?>" title="<?=$this->transEsc('Cite this')?>"><i class="fa fa-asterisk"></i> <?=$this->transEsc('Cite this')?></a><br/>
 
-	  <? /*getPreviews*/ ?>
-    <br/><?=$this->record($this->driver)->getPreviews()?>
+	  <? /*getPreviews - Suppressed Open Library and HathiTrust for Journal tiltes*/ ?>
+    <br/>
+         <? if (strpos($this->record($this->driver)->getFormatList(),'Journal') == false): ?>
+           <? if (strpos($this->record($this->driver)->getFormatList(),'Serial') == false):?>
+          <?=$this->record($this->driver)->getPreviews()?> <? endif ?><? endif ?>
 
       <? /* Saved lists */ ?>
       <div class="savedLists alert alert-info hidden">

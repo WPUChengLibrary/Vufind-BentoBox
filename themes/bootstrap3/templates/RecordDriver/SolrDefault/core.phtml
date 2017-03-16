@@ -23,8 +23,10 @@
     <? // if you have a preview tab but want to move or remove the preview link
        // from this area of the record view, this can be split into
        // getPreviewData() (should stay here) and
-       // getPreviewLink() (can go in your desired tab) ?>
-    <br/><?=$this->record($this->driver)->getPreviews()?>
+       // getPreviewLink() (can go in your desired tab)- Suppressed Open Library and HathiTrust for Journal tiltes ?>
+    <br/><? if (strpos($this->record($this->driver)->getFormatList(),'Journal') == false): ?>
+           <? if (strpos($this->record($this->driver)->getFormatList(),'Serial') == false):?>
+          <?=$this->record($this->driver)->getPreviews()?> <? endif ?><? endif ?>
   </div>
 
   <div class="col-sm-9">
