@@ -25,7 +25,7 @@
              <a href="<?=$this->escapeHtmlAttr($this->driver->getPLink())?>&scope=site&type=0&custid=s8953837&groupid=main&mode=bool&lang=en&authtype=ip" target="_blank" class="title _record_link">             
                   <!-- <a href="<?=$this->recordLink()->getUrl($this->driver)?>" class="title _record_link" > -->
                 <?=$item['Data']?> </a>
-              <?else:?>
+              <? else:?>
               <? if ($this->transEsc($item['Label']) == "Source"):?>
                 <?=$item['Data']?>
                 <span class="label label-info iconlabel <?=$this->driver->getPubType()?>"><?=$this->driver->getPubType()?></span>
@@ -45,6 +45,21 @@
           </p>
         </div>
       <? endif; ?>
+      
+         <? if ($this->driver->hasHTMLFullTextAvailable()): ?>
+     <a href="<?=$this->escapeHtmlAttr($this->driver->getPLink())?>&scope=site&type=0&custid=s8953837&groupid=main&mode=bool&lang=en&authtype=ip" target="_blank" class="icon html fulltext _record_link">
+    <!--  <a href="<?= $this->recordLink()->getUrl($this->driver, 'fulltext') ?>#html" class="icon html fulltext _record_link"> -->
+        <?=$this->transEsc('HTML Full Text Available')?>
+      </a>
+      &nbsp; &nbsp;
+
+    <? elseif ($this->driver->hasPdfAvailable()): ?>
+      <a href="https://ezproxy.wpunj.edu/login?url=https://chengfind.wpunj.edu<?= $this->recordLink()->getUrl($this->driver).'/PDF'; ?>" target="_blank" class="icon pdf fulltext">
+        <?=$this->transEsc('PDF Full Text Available')?>
+      </a> &nbsp; &nbsp;
+
+      <? else: ?>
+      
           <div class="resultItemLine4 custom-links">
  <? $customLinks = array_merge($this->driver->getFTCustomLinks(), $this->driver->getCustomLinks());
      if (!empty($customLinks)): ?>
@@ -60,29 +75,15 @@
               <a href="https://ezproxy.wpunj.edu/login?url=<?=$this->escapeHtmlAttr($url)?>" target="_blank" title="<?=$this->escapeHtmlAttr($mot)?>" class="custom-link">
               <? endif; ?>
                 <? if ($icon): ?><img src="<?=$this->escapeHtmlAttr($icon)?>" /> 
-                <? elseif(!$icon): ?><img src="http://imageserver.ebscohost.com/branding/images/FTF.gif"/> 
+                <? elseif(!$icon): ?><img src="https://imageserver.ebscohost.com/branding/images/FTF.gif"/> 
 				<? endif; ?><?=$this->escapeHtml($name)?>
               </a><br/>
 </span>
       <? endforeach; ?>
     <? endif; ?>
     </div>
-    
-    <? if ($this->driver->hasHTMLFullTextAvailable()): ?>
-     <a href="<?=$this->escapeHtmlAttr($this->driver->getPLink())?>&scope=site&type=0&custid=s8953837&groupid=main&mode=bool&lang=en&authtype=ip" target="_blank" class="icon html fulltext _record_link">
-    <!--  <a href="<?= $this->recordLink()->getUrl($this->driver, 'fulltext') ?>#html" class="icon html fulltext _record_link"> -->
-        <?=$this->transEsc('HTML Full Text Available')?>
-      </a>
-      &nbsp; &nbsp;
-    <? endif; ?>
-
-    <? if ($this->driver->hasPdfAvailable()): ?>
-      <a href="https://ezproxy.wpunj.edu/login?url=https://chengfind.wpunj.edu<?= $this->recordLink()->getUrl($this->driver).'/PDF'; ?>" target="_blank" class="icon pdf fulltext">
-        <?=$this->transEsc('PDF Full Text Available')?>
-      </a>
-    <? endif; ?>
+     <? endif; ?>
   </div>
-
   <div class="col-xs-2 right hidden-print">
     <? /* Display qrcode if appropriate: */ ?>
     <? if ($QRCode = $this->record($this->driver)->getQRCode("results")): ?>
