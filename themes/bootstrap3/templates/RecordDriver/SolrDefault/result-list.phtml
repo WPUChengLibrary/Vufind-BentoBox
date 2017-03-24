@@ -15,11 +15,11 @@
       <a href="<?=$this->recordLink()->getUrl($this->driver)?>" class="title">
       <?
         $summHighlightedTitle = $this->driver->getHighlightedTitle();
-        $summTitle = $this->driver->getTitle();
+        $summTitle = $this->escapeHtml($this->driver->getShortTitle() . ' ' . $this->driver->getSubtitle() . ' ' . $this->driver->getTitleSection());
         if (!empty($summHighlightedTitle)) {
           echo $this->highlight($this->addEllipsis($summHighlightedTitle, $summTitle));
         } else if (!empty($summTitle)) {
-          echo $this->escapeHtml($this->truncate($summTitle, 180));
+          echo $this->truncate($summTitle, 180);
         } else {
           echo $this->transEsc('Title not available');
         }
