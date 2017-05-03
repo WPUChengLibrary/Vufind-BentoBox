@@ -48,27 +48,24 @@ springshare_widget_config_1479753727825 = { path: 'assets' };
 				#s-lg-widget-1479753727825 li {font-weight: 600;}
                 #s-lg-widget-1479753727825 ul li {list-style-type: decimal;}
 </style>
-</div>
+</div></br>
+ <div id = "altdatabases" style="display: none;">  <i>Please try Selected Databases RECOMMENDED by librarians:</i> <ul>
+    <li><a href="http://ezproxy.wpunj.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&site=ehost-live&scope=site&type=1&db=&db=a9h&authtype=ip&bquery=<?=urlencode($lookfor)?>" target='_blank'><?=$this->transEsc('Academic Search Complete')?></a></li>
+    <li><a href="http://ezproxy.wpunj.edu/login?url=http://www.jstor.org/action/doBasicSearch?Query=<?=urlencode($lookfor)?>&acc=on&wc=on&fc=off&group=none" target='_blank'><?=$this->transEsc('Jstor')?></a></li>
+    <li><a href="http://ezproxy.wpunj.edu/login?url=https://scholar.google.com/scholar?hl=en&q=<?=urlencode($lookfor)?>" target='_blank'><?=$this->transEsc('Google Scholar')?></a></li>
+    <li><a href="http://ezproxy.wpunj.edu/login?url=http://search.proquest.com/central" target='_blank'><?=$this->transEsc('ProQuest Central')?></a></li>
+<ul></div>
+<script>
+// Set id for RECOMMENDED databases to something - #altdatabases
+// Set style for #altdatabases to display: none;
+// Only show #altdatabases if #databases.s-lg-widget-list-info contains "No results match the request."
+$(window).on('load', function() {
+$("div[class*='s-lg-widget-list-info']:contains('No results match the request')").append($('#altdatabases').clone().css('display','block') );
+    });
+</script>
 
 
 
-   <div>  <i>Please try Selected Databases RECOMMENDED by librarians:</i>
-
-    <div> <a href="http://ezproxy.wpunj.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&site=ehost-live&scope=site&type=1&db=&db=a9h&authtype=ip&bquery=<?=urlencode($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-database"></i> <?=$this->transEsc('Academic Search Complete')?></a>  </div>
-      <div>
-    <a href="http://ezproxy.wpunj.edu/login?url=http://site.ebrary.com/lib/wpunj/search.action?p00=<?=urlencode($lookfor)?>&fromSearch=fromSearch" target='_blank' class="btn btn-link"><i class="fa fa-database"></i> <?=$this->transEsc('Ebrary Ebooks')?></a>  </div>
-      <div>
-        <div>
-    <a href="http://ezproxy.wpunj.edu/login?url=http://www.jstor.org/action/doBasicSearch?Query=<?=urlencode($lookfor)?>&acc=on&wc=on&fc=off&group=none" target='_blank' class="btn btn-link"><i class="fa fa-database"></i> <?=$this->transEsc('Jstor')?></a>  </div>
-     <div>
-           <div>
-    <a href="http://ezproxy.wpunj.edu/login?url=https://scholar.google.com/scholar?hl=en&q=<?=urlencode($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-database"></i> <?=$this->transEsc('Google Scholar')?></a>  </div>
-    <a href="http://ezproxy.wpunj.edu/login?url=http://search.credoreference.com/search/all/?searchPhrase=<?=urlencode($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-database"></i> <?=$this->transEsc('Credo Reference\'s Academic Core')?></a>  </div>
-     <div>
-    <a href="http://ezproxy.wpunj.edu/login?url=http://search.proquest.com/central" target='_blank' class="btn btn-link"><i class="fa fa-database"></i> <?=$this->transEsc('ProQuest Central')?></a>  </div>
-    <br/> <br/></div>
-  
-  
  <? endif; ?>
   <!-- new added LibGuides link -->   
   </div>
@@ -84,14 +81,14 @@ springshare_widget_config_1479753727825 = { path: 'assets' };
       <?=$this->transEsc("Showing")?>
       <strong><?=$this->localizedNumber($results->getStartRecord())?></strong> - <strong><?=$this->localizedNumber($results->getEndRecord())?></strong>
       <? if (!isset($view->skipTotalCount)): ?>
-        <?=$this->transEsc('of')?> <strong><?=$this->localizedNumber($recordTotal)?></strong>
+        <?=$this->transEsc('of')?> <strong><?=$this->localizedNumber($recordTotal)?></strong><?=$this->transEsc(' results')?>
       <? endif; ?>
-      <? if (isset($view->overrideSearchHeading)): ?>
+  <!--  <? if (isset($view->overrideSearchHeading)): ?>
         <?=$view->overrideSearchHeading?>
       <? elseif ($params->getSearchType() == 'basic'): ?>
         <?=$this->transEsc('for search')?>: <strong>'<?=$this->escapeHtml($lookfor)?>'</strong>.
       <? endif; ?>
- <!--    <? if ($qtime = $results->getQuerySpeed()): ?>
+       <? if ($qtime = $results->getQuerySpeed()): ?>
         <?=$this->transEsc('query time')?>: <?=$this->localizedNumber($qtime, 2).$this->transEsc('seconds_abbrev')?>
       <? endif; ?> -->
       <?=$this->search()->renderSpellingSuggestions('<strong>' . $this->transEsc('spell_suggest') . '</strong>:', $results, $this); ?>
