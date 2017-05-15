@@ -15,7 +15,7 @@
       <a href="<?=$this->recordLink()->getUrl($this->driver)?>" class="title">
       <?
         $summHighlightedTitle = $this->driver->getHighlightedTitle();
-        $summTitle = $this->escapeHtml($this->driver->getShortTitle() . ' ' . $this->driver->getSubtitle() . ' ' . $this->driver->getTitleSection());
+        $summTitle = $this->driver->getShortTitle() . ' ' . $this->driver->getSubtitle() . ' ' . $this->driver->getTitleSection();
         if (!empty($summHighlightedTitle)) {
           echo $this->highlight($this->addEllipsis($summHighlightedTitle, $summTitle));
         } else if (!empty($summTitle)) {
