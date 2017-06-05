@@ -115,7 +115,7 @@ $encodedHighLigtTerm = http_build_query(array('highlight'=>$searchTerm));
 
     <?php $i = 0;
     foreach ($results['records'] as $result) { 
-	 if(array_search("Ebrary Academic Complete", array_column($result['FullTextHoldings'],'Name')) !== 0 ){	 
+	 if(array_search("ProQuest Ebook Central - Academic Complete", array_column($result['FullTextHoldings'],'Name')) !== 0 ){	 
   if(++$i > 5)
     break;
 	        ?>

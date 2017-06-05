@@ -138,8 +138,8 @@ $("div[class*='s-lg-widget-list-info']:contains('No results match the request')"
     
    <div>
    
-           <div class="pull-right"><a class="btn btn-info" href="http://search.ebscohost.com/login.aspx?direct=true&amp;site=eds-live&amp;scope=site&amp;type=44&amp;db=edspub&amp;custid=s8953837&amp;groupid=main&amp;profid=pfi&amp;mode=bool&amp;authtype=ip,guest&bquery=<?=urlencode($lookfor)?>" target='_blank' class="btn btn-link"><i class="fa fa-external-link-square"></i> <?=$this->transEsc('More Results')?></a></div>
-<div><h2><a id="journals" name="journals"><a href="http://search.ebscohost.com/login.aspx?direct=true&amp;site=eds-live&amp;scope=site&amp;type=44&amp;db=edspub&amp;custid=s8953837&amp;groupid=main&amp;profid=pfi&amp;mode=bool&amp;authtype=ip,guest&bquery=<?=urlencode($lookfor)?>" target='_blank' >Journal Titles</a></h2></div>
+           <div class="pull-right"><a class="btn btn-info" href="http://search.ebscohost.com/login.aspx?direct=true&amp;site=eds-live&amp;scope=site&amp;type=44&amp;db=edspub&amp;custid=s8953837&amp;groupid=main&amp;profid=pfi&amp;mode=bool&amp;authtype=ip,guest&bquery=<?=urlencode($lookfor)?>+NOT+PT+BOOK" target='_blank' class="btn btn-link"><i class="fa fa-external-link-square"></i> <?=$this->transEsc('More Results')?></a></div>
+<div><h2><a id="journals" name="journals"><a href="http://search.ebscohost.com/login.aspx?direct=true&amp;site=eds-live&amp;scope=site&amp;type=44&amp;db=edspub&amp;custid=s8953837&amp;groupid=main&amp;profid=pfi&amp;mode=bool&amp;authtype=ip,guest&bquery=<?=urlencode($lookfor)?>+NOT+PT+BOOK" target='_blank' >Journal Titles</a></h2></div>
 
 <script>
 function setIframeHeight(iframe) {
